@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {transformCreateEstimateData} from '../../utils/createEstimateUtils'
 import { estimateConfig } from '../../configs/CreateEstimateConfig';
 
-const CreateEstimate = () => {
+const EstimateCreate = () => {
     const tenantId = Digit.ULBService.getCurrentTenantId();
     const { t } = useTranslation();
     const reqCreate = {
@@ -49,4 +49,4 @@ const CreateEstimate = () => {
   )
 }
 
-export default CreateEstimate
+export default EstimateCreate

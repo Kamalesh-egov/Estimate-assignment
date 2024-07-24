@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { contractConfig } from '../../configs/CreateContractConfig';
 import { transformCreateContractData } from '../../utils/createContractUtils';
 
-const CreateContract = () => {
+const ContractCreate = () => {
     const tenantId = Digit.ULBService.getCurrentTenantId();
     const { t } = useTranslation();
     const reqCreate = {
@@ -49,4 +49,4 @@ const CreateContract = () => {
   )
 }
 
-export default CreateContract
+export default ContractCreate

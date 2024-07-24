@@ -11,7 +11,7 @@ const defaultSearchValues = {
   schemaCode:""
 };
 
-const SearchEstimate = () => {
+const EstimateSearch = () => {
   const { t } = useTranslation();
   const [defaultValues, setDefaultValues] = useState(defaultSearchValues); // State to hold default values for search fields
   const estimateConfigs = searchconfig();
@@ -23,7 +23,7 @@ const SearchEstimate = () => {
 
   return (
     <React.Fragment>
-    <Header styles={{ fontSize: "32px" }}>{t(indConfigs?.label)}</Header> 
+    <Header styles={{ fontSize: "32px" }}>{t(estimateConfigs?.label)}</Header> 
     <div className="inbox-search-wrapper">
       {/* Pass defaultValues as props to InboxSearchComposer */}
       <InboxSearchComposer configs={estimateConfigs} defaultValues={defaultValues}></InboxSearchComposer>
@@ -32,4 +32,4 @@ const SearchEstimate = () => {
   )
 }
 
-export default SearchEstimate
+export default EstimateSearch

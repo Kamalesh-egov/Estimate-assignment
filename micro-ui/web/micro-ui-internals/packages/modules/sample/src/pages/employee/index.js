@@ -15,8 +15,10 @@ import SampleComponents from "./SampleComponents";
 import PanelCardResponse from "./PanelCardResponse";
 import TabIndividualSearch from "./TabIndividualSearch";
 import IndividualViewDetails from "./IndividualViewDetails";
-import CreateEstimate from "./CreateEstimate";
-import CreateContract from "./CreateContract";
+import EstimateCreate from "./EstimateCreate";
+import ContractCreate from "./ContractCreate";
+import EstimateSearch from "./EstimateSearch";
+import EstimateViewDetails from "./EstimateViewDetails";
 
 const ProjectBreadCrumb = ({ location }) => {
   const { t } = useTranslation();
@@ -55,8 +57,10 @@ const App = ({ path, stateCode, userType, tenants }) => {
         <PrivateRoute path={`${path}/sample-success`} component={() => <PanelCardResponse />} />
         <PrivateRoute path={`${path}/tab-search-individual`} component={() => <TabIndividualSearch />} />
         <PrivateRoute path={`${path}/individual-details-view`} component={() => <IndividualViewDetails />} />
-        <PrivateRoute path={`${path}/create-estimate`} component={() => <CreateEstimate />} />
-        <PrivateRoute path={`${path}/create-contract`} component={() => <CreateContract />} />
+        <PrivateRoute path={`${path}/estimate-create`} component={() => <EstimateCreate />} />
+        <PrivateRoute path={`${path}/estimate-search`} component={() => <EstimateSearch />} />
+        <PrivateRoute path={`${path}/estimate-details-view`} component={() => <EstimateViewDetails />} />
+        {/* <PrivateRoute path={`${path}/contract-create`} component={() => <ContractCreate />} /> */}
       </AppContainer>
     </Switch>
   );

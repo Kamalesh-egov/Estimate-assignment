@@ -5,25 +5,26 @@ const defaultSearchValues = {
 export const searchconfig = () => 
 {
   return {
-    label: "Individual Search",
+    label: "Estimate Search",
     type: "search",
     apiDetails: {
-      serviceName: "/individual/v1/_search",
+      serviceName: "/mdms-v2/v2/_search",
       requestParam: {
           "tenantId":Digit.ULBService.getCurrentTenantId()
       },
       requestBody: {
         apiOperation: "SEARCH",
-        Individual: {
+        MdmsCriteria: {
           "tenantId": Digit.ULBService.getCurrentTenantId(),
+          // "schemaCode": ""
         },
       },
      masterName: "commonUiConfig",
-      moduleName: "SearchIndividualConfig",
+      moduleName: "SearchEstimateConfig",
       minParametersForSearchForm: 0,
       tableFormJsonPath: "requestParam",
-      filterFormJsonPath: "requestBody.Individual",
-      searchFormJsonPath: "requestBody.Individual",
+      filterFormJsonPath: "requestBody.MdmsCriteria",
+      searchFormJsonPath: "requestBody.MdmsCriteria",
     },
     sections: {
       search: {
@@ -35,33 +36,36 @@ export const searchconfig = () =>
           defaultValues: defaultSearchValues, // Set default values for search fields
           fields: [
             {
-              label: "Applicant name ",
+              label: "Tenant Id",
               isMandatory: false,
-              key: "individualName",
+              key: "tenantId",
               type: "text",
               populators: { 
-                name: "individualName", 
-                error: "Required", 
-                validation: { pattern: /^[A-Za-z]+$/i } 
+                name: "tenantId", 
+                // error: "Required", 
+                // validation: { pattern: /^[A-Za-z]+$/i } 
               },
             },
             {
-              label: "Phone number",
+              label: "Schema Code",
               isMandatory: false,
-              key: "Phone number",
-              type: "number",
-              disable: false,
-              populators: { name: "mobileNumber", error: "sample error message", validation: { min: 0, max: 999999999} },
-            },
-            {
-              label: "Individual Id ",
-              isMandatory: false,
+              key: "schemaCode",
               type: "text",
               disable: false,
               populators: { 
-                name: "individualId",
+                name: "schemaCode",
               },
             },
+            // {
+            //   label: "Id",
+            //   isMandatory: false,
+            //   key: "id",
+            //   type: "text",
+            //   disable: false,
+            //   populators: { 
+            //     name: "id",
+            //   },
+            // },
           ],
         },
 
@@ -72,23 +76,23 @@ export const searchconfig = () =>
         uiConfig: {
           columns: [
             {
-              label: "IndividualID",
-              jsonPath: "individualId",
-            },
-            
-            {
-              label: "Name",
-              jsonPath: "name.givenName",
-              
+              label: "Tenant Id",
+              jsonPath: "tenantId",
             },
             {
-              label: "Address",
-              jsonPath: "address.locality.code",
+              label: "Schema Code",
+              jsonPath: "schemaCode",
+              // "additionalCustomization": true,
+            },
+            {
+              label: "Id",
+              jsonPath: "id",
+              // additionalCustomization: true,
             },
           ],
 
           enableColumnSort: true,
-          resultsJsonPath: "Individual"
+          resultsJsonPath: "mdms"
         },
         show: true,
       },
