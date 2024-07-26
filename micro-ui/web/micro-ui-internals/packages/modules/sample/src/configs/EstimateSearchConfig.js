@@ -1,7 +1,7 @@
 const defaultSearchValues = {
-    tenantId: "",
-    schemaCode:""
-  };
+  value: "",
+  field: {}
+}
 export const searchconfig = () => 
 {
   return {
@@ -16,6 +16,7 @@ export const searchconfig = () =>
         apiOperation: "SEARCH",
         MdmsCriteria: {
           "tenantId": Digit.ULBService.getCurrentTenantId(),
+          "customs": {}
           // "schemaCode": ""
         },
       },
@@ -23,12 +24,20 @@ export const searchconfig = () =>
       moduleName: "SearchEstimateConfig",
       minParametersForSearchForm: 0,
       tableFormJsonPath: "requestParam",
-      filterFormJsonPath: "requestBody.MdmsCriteria",
-      searchFormJsonPath: "requestBody.MdmsCriteria",
+      filterFormJsonPath: "requestBody.MdmsCriteria.customs",
+      searchFormJsonPath: "requestBody.MdmsCriteria.customs",
     },
     sections: {
       search: {
         uiConfig: {
+          searchWrapperStyles: {
+            flexDirection:"column-reverse",
+            marginTop:"2rem",
+            alignItems:"center",
+            justifyContent:"end",
+            gridColumn:"4"
+          },
+          headerStyle: null,
           formClassName: "custom-both-clear-search",
           primaryLabel: "ES_COMMON_SEARCH",
           secondaryLabel: "ES_COMMON_CLEAR_SEARCH",
@@ -36,26 +45,52 @@ export const searchconfig = () =>
           defaultValues: defaultSearchValues, // Set default values for search fields
           fields: [
             {
-              label: "Tenant Id",
+              label: "WBH_FIELD",
+              key: "field",
+              type: "dropdown",
               isMandatory: false,
-              key: "tenantId",
-              type: "text",
-              populators: { 
-                name: "tenantId", 
-                // error: "Required", 
-                // validation: { pattern: /^[A-Za-z]+$/i } 
+              disable: false,
+              populators: {
+                name: "field",
+                optionsKey: "label",
+                optionsCustomStyle: { top: "2.3rem" },
+                options: [
+                  {
+                    label: "Name",
+                    name: "name",
+                  },
+                  {
+                    label: "Description",
+                    name: "description",
+                  },
+                  {
+                    label: "Executing Department",
+                    name: "executingDepartment",
+                  },
+                ],
               },
             },
             {
-              label: "Schema Code",
-              isMandatory: false,
-              key: "schemaCode",
+              label: "WBH_FIELD_VALUE",
               type: "text",
+              key: "value",
+              isMandatory: false,
               disable: false,
-              populators: { 
-                name: "schemaCode",
+              populators: {
+                name: "value",
+                validation: { pattern: {}, maxlength: 140 },
               },
             },
+            // {
+            //   label: "Schema Code",
+            //   isMandatory: false,
+            //   key: "schemaCode",
+            //   type: "text",
+            //   disable: false,
+            //   populators: { 
+            //     name: "schemaCode",
+            //   },
+            // },
             // {
             //   label: "Id",
             //   isMandatory: false,
@@ -68,7 +103,8 @@ export const searchconfig = () =>
             // },
           ],
         },
-
+        label: "",
+        children: {},
         show: true
       },
       searchResult: {
@@ -76,21 +112,19 @@ export const searchconfig = () =>
         uiConfig: {
           columns: [
             {
-              label: "Tenant Id",
-              jsonPath: "tenantId",
+              label: "Name",
+              jsonPath: "data.name",
             },
             {
-              label: "Schema Code",
-              jsonPath: "schemaCode",
-              // "additionalCustomization": true,
+              label: "Description",
+              jsonPath: "data.description",
             },
             {
-              label: "Id",
-              jsonPath: "id",
-              // additionalCustomization: true,
+              label: "Executing Department",
+              jsonPath: "data.executingDepartment",
             },
           ],
-
+          enableGlobalSearch: false,
           enableColumnSort: true,
           resultsJsonPath: "mdms"
         },
